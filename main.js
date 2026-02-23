@@ -1,37 +1,24 @@
 const cvs = document.getElementById('gameCanvas');
 const ctx = cvs.getContext('2d');
 
-// State variables
-let x = cvs.width / 2, y = cvs.height / 2, r = 40;
-let dx = 6, dy = 5, rx = r, ry = r;
+// Configuración inicial
+const centerX = cvs.width / 2;
+const centerY = cvs.height / 2;
+const radius = 40;
 
-(function animationLoop() {
+(function renderLoop() {
+    // 1. Limpieza del frame anterior
     ctx.clearRect(0, 0, cvs.width, cvs.height);
-    
-    // 1. Update position
-    x += dx; 
-    y += dy;
 
-    // 2. Faster recovery for realistic stiff rubber 
-    rx += (r - rx) * 0.25;
-    ry += (r - ry) * 0.25;
-
-    // 3. Wall collisions & squash trigger 
-    if (x + r > cvs.width || x - r < 0) {
-        dx = -dx; x += dx; 
-        rx = r * 0.8; ry = r * 1.2; 
-    }
-    if (y + r > cvs.height || y - r < 0) {
-        dy = -dy; y += dy; 
-        rx = r * 1.2; ry = r * 0.8; 
-    }
-
-    // 4. Dibujar esfera en el canvas
+    // 2. Configuración del trazo
     ctx.beginPath();
     ctx.strokeStyle = 'red';
     ctx.lineWidth = 4;
-    ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2);
+
+    // 3. Dibujo (Usamos arc para círculos perfectos)
+    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
     ctx.stroke();
 
-    requestAnimationFrame(animationLoop);
+    // 4. Ciclo de animación
+    requestAnimationFrame(renderLoop);
 })();
