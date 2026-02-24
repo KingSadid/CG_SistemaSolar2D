@@ -1,5 +1,5 @@
 /**
- * 1. CONFIGURACIÓN
+ * CONFIGURACIÓN
  */
 const SYSTEM_CONFIG = {
     sun: {
@@ -22,9 +22,7 @@ const SYSTEM_CONFIG = {
 const cvs = document.getElementById('gameCanvas');
 const ctx = cvs.getContext('2d');
 
-/**
- * 2. CLASE PLANET 
- */
+
 class Planet {
     constructor(data) {
         this.radius = data.r;
@@ -57,9 +55,8 @@ class Planet {
     }
 }
 
-/**
- * 3. ENGINE
- */
+
+
 const SolarSystem = {
     planets: [],
     width: 0,
